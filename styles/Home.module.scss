@@ -1,0 +1,35 @@
+.root {
+  padding-top: 20px;
+}
+
+.main {
+  .linkToHome {
+    display: inline-block;
+    line-height: 0;
+    color: #fff;
+    background-color: var(--spacejelly-300);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    padding: 8px;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    margin-bottom: 24px;
+  }
+
+  .includeList,
+  .toDoList {
+    margin-inline-start: 1em;
+    margin-bottom: 1.5rem;
+
+    li {
+      line-height: 1.5rem;
+    }
+  }
+
+  .link {
+    font-size: 1.25rem;
+    text-decoration: underline;
+  }
+}
