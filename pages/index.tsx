@@ -41,6 +41,7 @@ const Home: NextPage = () => {
             <li>Next.js, Typescript, Material UI, Redux Toolkit</li>
             <li>Favicon template</li>
             <li>Comfortable folder structure</li>
+            {/* <li>Light/dark mode</li> */}
           </ul>
 
           <h1>To Do:</h1>
