@@ -1,0 +1,39 @@
+.root {
+  color: var(--dark-blue);
+
+  .wrapper {
+    width: 460px;
+  }
+
+  .title {
+    font-size: var(--xl_9);
+    line-height: var(--xl_9);
+    margin-bottom: 13px;
+  }
+
+  form {
+    padding: 15px 0;
+    margin-bottom: 2px;
+    
+    .inputGroup {
+      margin-bottom: 22px;
+    }
+  }
+
+  .btn {
+    margin-top: 51px;
+    // margin-bottom: 16px;
+  }
+
+  .footer {
+    text-align: center;
+    color: rgba(49, 46, 129, 0.8);
+    font-size: var(--lg);
+    line-height: var(--xl_4);
+
+    .link {
+      color: var(--cyan);
+      font-weight: var(--bold);
+    }
+  }
+}

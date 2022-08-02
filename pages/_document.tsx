@@ -25,17 +25,17 @@ export default class MyDocument extends Document {
           />
           <link rel="manifest" href="/manifest.json" />
           <meta name="apple-mobile-web-app-title" content="Next.js Starter" />
-          
+
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
             crossOrigin=""
           />
-          {/* <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+          <link
+            href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&display=swap"
             rel="stylesheet"
-          /> */}
+          />
         </Head>
         <body>
           <Main />

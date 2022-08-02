@@ -1,0 +1,48 @@
+.root {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+
+  >div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 50%;
+    height: 100%;
+  }
+
+  .left {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: var(--full-white);
+    // justify-content: flex-end;
+    background-color: var(--dark-blue);
+    // padding-right: 200px;
+
+    .blockImg {
+      display: block;
+      width: 377px;
+      margin-bottom: 26px;
+    }
+
+    .title {
+      font-size: var(--xl_5);
+      line-height: var(--xl_10);
+      font-weight: var(--semi-bold);
+    }
+
+    .subtitle {
+      font-size: var(--lg);
+      line-height: var(--xl_6);
+    }
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+  }
+}
