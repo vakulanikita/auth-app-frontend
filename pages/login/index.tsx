@@ -44,43 +44,23 @@ const LoginPage: NextPage = () => {
                   .required("Please enter the correct password"),
               })}
               onSubmit={(values, actions) => {
-                // setError("");
-
                 const body = {
                   email: values.email,
                   password: values.password,
                 };
 
-                // const schema = Yup.object().shape({
-                //   digit: Yup.number()
-                //     .typeError("Must be a number")
-                //     .required("Required"),
-                //   text: Yup.string().required("Required"),
-                // });
-
-                // try {
-                //   schema.validateSync({ text: "ciaone", digit: "pinp" });
-                // } catch (err) {
-                //   console.log(err);
-                // }
-
-                // console.log(Yup.string().email().isValidSync(values.email));
-                // console.log(Yup.string().matches(/[A-Z]/).isValidSync(values.password));
-                // console.log(Yup.string().matches(/[0-9]/).isValidSync(values.password));
                 console.log(
                   Yup.string()
                     .matches(/(?=.*[!?@#$%^&()№*])/)
                     .isValidSync(values.password)
                 );
 
-                // console.log(body);
-
                 Api.post("auth/login", body)
                   .then((result) => {
                     console.log(result);
                     if (result.data.status === "notActive") {
                       router.replace(`/security?email=${values.email}`);
-                      return
+                      return;
                     }
 
                     if (result.status === 201 && result.data) {
@@ -97,109 +77,10 @@ const LoginPage: NextPage = () => {
                     // The user is not in the database, or the password is incorrect
                     console.log(err.response);
                     setError("There was a problem with your login.");
-                    // if(result.response.status === 401) {
-                    //   // not in db
-                    // }
                   })
                   .finally(() => {
                     actions.setSubmitting(false);
                   });
-
-                // Api.post<User>("/auth/signin", JSON.stringify(body))
-                //   .then((result) => {
-                //     // console.log();
-                //     if (result.status === 200) {
-                //       const { accessToken, ...userData } = result.data;
-                //       // console.log(result);
-
-                //       switch (userData.status) {
-                //         case "active": {
-                //           // console.log(result.data);
-                //           const user = {
-                //             accessToken: `Bearer ${accessToken}`,
-                //             ...userData,
-                //           };
-
-                //           try {
-                //             const gaCallback = () => {
-                //               setCookie("user", user, {
-                //                 path: "/",
-                //                 expires: new Date(userData.expiresIn),
-                //               });
-
-                //               menu
-                //                 ? dispatch(ToggleMenuAction(null))
-                //                 : dispatch(ToggleAuthModalAction(null));
-                //               Router.reload();
-                //             };
-
-                //             dispatch(SetUser(userData));
-                //             gaEvent("finish_log_in");
-
-                //             setCookie("user_token", `Bearer ${accessToken}`, {
-                //               path: "/",
-                //               expires: new Date(userData.expiresIn),
-                //             });
-
-                //             setCookie("user", user, {
-                //               path: "/",
-                //               expires: new Date(userData.expiresIn),
-                //             });
-
-                //             menu
-                //               ? dispatch(ToggleMenuAction(null))
-                //               : dispatch(ToggleAuthModalAction(null));
-                //             Router.reload();
-                //             // menu ? dispatch(ToggleMenuAction(null)) : dispatch(ToggleAuthModalAction(null))
-                //           } catch (e) {
-                //             console.log(e);
-                //           }
-
-                //           return;
-                //         }
-
-                //         case "deleted": {
-                //           // dispatch(SetUser({
-                //           //   email: result.data.email,
-                //           //   status: result.data.status,
-                //           //   role: result.data.role,
-                //           // }))
-                //           // dispatch(ChangeAuthFormAction('emailCode'));
-                //           setError("This account has been deleted");
-                //           return;
-                //         }
-
-                //         case "notActive": {
-                //           // dispatch(SetUser({
-                //           //   email: result.data.email,
-                //           //   status: result.data.status,
-                //           //   role: result.data.role,
-                //           // }))
-                //           dispatch(ChangeAuthFormAction("registerCode"));
-                //           return;
-                //         }
-
-                //         default: {
-                //           // console.log(result.data.status);
-                //         }
-                //       }
-                //       // Error if the user is not in the database
-                //       setError(result.data.message);
-                //     }
-                //   })
-                //   .catch((reason) => {
-                //     if (axios.isAxiosError(reason)) {
-                //       console.log(reason);
-                //       // alert(reason)
-                //       reason?.response?.data.message
-                //         ? // Error if the user is in the database, but the password is entered incorrectly
-                //           setError(reason?.response?.data.message)
-                //         : setError(i18nErrors.somethingWrong);
-                //     }
-                //   })
-                //   .finally(() => {
-                //     actions.setSubmitting(false);
-                //   });
               }}
             >
               {(props) => (

@@ -24,6 +24,8 @@
     // padding-right: 200px;
 
     .blockImg {
+      position: relative;
+      left: 10px;
       display: block;
       width: 377px;
       margin-bottom: 26px;
@@ -44,5 +46,15 @@
   .right {
     display: flex;
     flex-direction: column;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .left {
+      display: none;
+    }
+
+    .right {
+      width: 100%;
+    }
   }
 }

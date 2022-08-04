@@ -3,6 +3,11 @@
 
   .wrapper {
     width: 460px;
+
+    @media screen and (max-width: 500px) {
+      width: 100%;
+      padding: 0 10px;
+    }
   }
 
   .title {
@@ -21,6 +26,7 @@
 
   .errorAlert {
     margin-bottom: 15px;
+    font-size: var(--base);
   }
 
   .pinCodeWrapper {
