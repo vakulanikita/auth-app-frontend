@@ -17,10 +17,7 @@ interface RegisterPageProps {}
 
 const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
   const router = useRouter();
-  console.log(router);
-  const [submitted, setSubmitted] = React.useState(false);
   const [error, setError] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
 
   return (
     <>
@@ -55,8 +52,6 @@ const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
                   .required("Please enter the correct password"),
               })}
               onSubmit={(values, actions) => {
-                // setError("");
-
                 const body = {
                   email: values.email,
                   password: values.password,
@@ -64,11 +59,9 @@ const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
                   lastName: values.lastName,
                 };
 
-                // console.log(body);
-
                 Api.post("/auth/signup", body)
                   .then((result) => {
-                    console.log(result);
+                    // console.log(result);
                     if (result.data.status === "failure") {
                       setError("An account with this email already exists");
                     }
@@ -194,16 +187,6 @@ const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
                       isLoading={props.isSubmitting}
                       type="submit"
                       isDisabled={!(props.isValid && props.dirty)}
-                      onClick={() => {
-                        setSubmitted(true);
-                        // setError(
-                        //   props.errors?.firstName ||
-                        //     props.errors?.lastName ||
-                        //     props.errors?.email ||
-                        //     props.errors?.password ||
-                        //     ""
-                        // );
-                      }}
                     >
                       Sign Up
                     </Button>

@@ -31,8 +31,6 @@ export const InputText: React.FC<InputProps> = ({
   tempEmailLabel,
   ...props
 }) => {
-  const [open, setOpen] = React.useState(false);
-
   return (
     <>
       <div className={clsx(s.root, s.password, touched && errors && s.error)}>

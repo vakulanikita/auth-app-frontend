@@ -135,13 +135,6 @@ const SecurityPage: NextPage<SecurityPageProps> = ({ email }) => {
                 Send Again
               </Button>
             </div>
-
-            {/* <div className={s.footer}>
-              Don’t have an account?{" "}
-              <NextLink href="/register" passHref>
-                <a className={s.link}>Sign Up</a>
-              </NextLink>
-            </div> */}
           </div>
         </AuthPageLayout>
       </div>
@@ -167,12 +160,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: { email: query.email },
   };
-
-  // return {
-  //   props: {
-  //     userToken: req.cookies.user_token,
-  //   },
-  // };
 };
 
 export default SecurityPage;

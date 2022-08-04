@@ -17,9 +17,7 @@ import { useRouter } from "next/router";
 const LoginPage: NextPage = () => {
   const router = useRouter();
   const [_, setCookie] = useCookies();
-  const [submitted, setSubmitted] = React.useState(false);
   const [error, setError] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
 
   return (
     <>
@@ -49,15 +47,9 @@ const LoginPage: NextPage = () => {
                   password: values.password,
                 };
 
-                console.log(
-                  Yup.string()
-                    .matches(/(?=.*[!?@#$%^&()№*])/)
-                    .isValidSync(values.password)
-                );
-
                 Api.post("auth/login", body)
                   .then((result) => {
-                    console.log(result);
+                    // console.log(result);
                     if (result.data.status === "notActive") {
                       router.push(`/security?email=${values.email}`);
                       return;
@@ -125,13 +117,6 @@ const LoginPage: NextPage = () => {
                       isLoading={props.isSubmitting}
                       type="submit"
                       isDisabled={!(props.isValid && props.dirty)}
-                      onClick={() => {
-                        setSubmitted(true);
-                        // setError(
-                        //   props.errors?.email || props.errors?.password || ""
-                        // );
-                        // console.log("click");
-                      }}
                     >
                       Sign In
                     </Button>
