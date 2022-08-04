@@ -1,6 +1,7 @@
 .root {
   color: var(--dark-blue);
   max-height: 100vh;
+  overflow: hidden;
 
   .wrapper {
     width: 460px;
