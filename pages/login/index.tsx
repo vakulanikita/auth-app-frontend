@@ -8,10 +8,15 @@ import Button from "../../components/Button";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import clsx from "clsx";
-import { Box } from "@mui/material";
+import { Alert, Box } from "@mui/material";
 import { InputPassword, InputText } from "../../components/Input";
+import { Api } from "../../utils/api";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 
 const LoginPage: NextPage = () => {
+  const router = useRouter();
+  const [_, setCookie] = useCookies();
   const [submitted, setSubmitted] = React.useState(false);
   const [error, setError] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -68,7 +73,37 @@ const LoginPage: NextPage = () => {
                     .isValidSync(values.password)
                 );
 
-                console.log(body);
+                // console.log(body);
+
+                Api.post("auth/login", body)
+                  .then((result) => {
+                    console.log(result);
+                    if (result.data.status === "notActive") {
+                      router.replace(`/security?email=${values.email}`);
+                      return
+                    }
+
+                    if (result.status === 201 && result.data) {
+                      setCookie("user_token", `Bearer ${result.data}`, {
+                        path: "/",
+                        expires: new Date(
+                          Date.now() + 1000 * 60 * 60 * 24 * 30
+                        ),
+                      });
+                      router.replace("/");
+                    }
+                  })
+                  .catch((err) => {
+                    // The user is not in the database, or the password is incorrect
+                    console.log(err.response);
+                    setError("There was a problem with your login.");
+                    // if(result.response.status === 401) {
+                    //   // not in db
+                    // }
+                  })
+                  .finally(() => {
+                    actions.setSubmitting(false);
+                  });
 
                 // Api.post<User>("/auth/signin", JSON.stringify(body))
                 //   .then((result) => {
@@ -170,7 +205,11 @@ const LoginPage: NextPage = () => {
               {(props) => (
                 <form onSubmit={props.handleSubmit}>
                   <Box>
-                    {/* {error && <div className={s.formError}>{error}</div>} */}
+                    {error && (
+                      <Alert severity="error" className={s.errorAlert}>
+                        {error}
+                      </Alert>
+                    )}
 
                     <div className={s.inputGroup}>
                       <InputText
@@ -202,15 +241,15 @@ const LoginPage: NextPage = () => {
                   <div className={s.btn}>
                     <Button
                       variant="primary"
-                      isLoading={false}
+                      isLoading={props.isSubmitting}
                       type="submit"
                       isDisabled={!(props.isValid && props.dirty)}
                       onClick={() => {
                         setSubmitted(true);
-                        setError(
-                          props.errors?.email || props.errors?.password || ""
-                        );
-                        console.log("click");
+                        // setError(
+                        //   props.errors?.email || props.errors?.password || ""
+                        // );
+                        // console.log("click");
                       }}
                     >
                       Sign In

@@ -5,8 +5,8 @@ import s from "./Button.module.scss";
 interface ButtonProps {
   children: React.ReactNode;
   variant: "primary";
-  isLoading: boolean;
-  isDisabled: boolean;
+  isLoading?: boolean;
+  isDisabled?: boolean;
   type?: "submit" | "button" | "reset";
   onClick?: () => void
 }
@@ -14,8 +14,8 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   children,
   variant,
-  isLoading,
-  isDisabled,
+  isLoading = false,
+  isDisabled = false,
   type = "button",
   onClick
 }) => {
@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       className={clsx(s.root, s[variant], isLoading && s.loading, isDisabled && s.disabled)}
-      disabled={isLoading}
+      disabled={isLoading || isDisabled}
       onClick={onClick}
     >
       {/* {children} */}

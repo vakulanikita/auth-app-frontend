@@ -1,6 +1,6 @@
 import React from "react";
 import NextLink from "next/link";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import s from "./RegisterPage.module.scss";
 import AuthPageLayout from "../../components/Container/layouts/AuthPageLayout";
@@ -8,13 +8,19 @@ import Button from "../../components/Button";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import clsx from "clsx";
-import { Box } from "@mui/material";
+import { Alert, Box } from "@mui/material";
 import { InputPassword, InputText } from "../../components/Input";
+import { Api } from "../../utils/api";
+import { useRouter } from "next/router";
 
-const RegisterPage: NextPage = () => {
+interface RegisterPageProps {}
+
+const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
+  const router = useRouter();
+  console.log(router);
   const [submitted, setSubmitted] = React.useState(false);
   const [error, setError] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false);
 
   return (
     <>
@@ -54,9 +60,30 @@ const RegisterPage: NextPage = () => {
                 const body = {
                   email: values.email,
                   password: values.password,
+                  firstName: values.firstName,
+                  lastName: values.lastName,
                 };
 
-                console.log(body);
+                // console.log(body);
+
+                Api.post("/auth/signup", body)
+                  .then((result) => {
+                    console.log(result);
+                    if (result.data.status === "failure") {
+                      setError("An account with this email already exists");
+                    }
+                    if (result.data.status === "success") {
+                      router.replace(`/security?email=${values.email}`);
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    console.log(err.response);
+                    setError("There was a problem with your registration.");
+                  })
+                  .finally(() => {
+                    actions.setSubmitting(false);
+                  });
               }}
             >
               {(props) => (
@@ -64,6 +91,11 @@ const RegisterPage: NextPage = () => {
                   <Box>
                     {/* {submitted && props.errors && <div>{error}</div>} */}
                     {/* {error && <div className={s.formError}>{error}</div>} */}
+                    {error && (
+                      <Alert severity="error" className={s.errorAlert}>
+                        {error}
+                      </Alert>
+                    )}
 
                     <div className={clsx(s.inputGroup, s.row)}>
                       <InputText
@@ -158,21 +190,18 @@ const RegisterPage: NextPage = () => {
                   <div className={s.btn}>
                     <Button
                       variant="primary"
-                      isLoading={false}
+                      isLoading={props.isSubmitting}
                       type="submit"
                       isDisabled={!(props.isValid && props.dirty)}
                       onClick={() => {
                         setSubmitted(true);
-                        setError(
-                          props.errors?.firstName ||
-                            props.errors?.lastName ||
-                            props.errors?.email ||
-                            props.errors?.password ||
-                            ""
-                        );
-                        console.log(props);
-                        console.log(props.isValid);
-                        console.log("click");
+                        // setError(
+                        //   props.errors?.firstName ||
+                        //     props.errors?.lastName ||
+                        //     props.errors?.email ||
+                        //     props.errors?.password ||
+                        //     ""
+                        // );
                       }}
                     >
                       Sign Up

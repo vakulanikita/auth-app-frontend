@@ -1,33 +1,40 @@
 .root {
-  padding-top: 20px;
+  // padding-top: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  background-color: var(--dark-blue);
+  margin-bottom: 100px;
+
+  .link {
+    font-size: var(--xl_6);
+    color: var(--full-white);
+    font-weight: var(--bold);
+  }
 }
 
 .main {
-  .linkToHome {
-    display: inline-block;
-    line-height: 0;
-    border-radius: 6px;
-    margin-bottom: 12px;
-    padding: 8px;
-  }
+  .profileData {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: var(--lg);
 
-  h1 {
-    font-size: 2.25rem;
-    margin-bottom: 24px;
-  }
+    .title {
+      position: relative;
+      top: 1px;
+      font-weight: var(--bold);
+    }
 
-  .includeList,
-  .toDoList {
-    margin-inline-start: 1em;
-    margin-bottom: 1.5rem;
+    .info {
 
-    li {
-      line-height: 1.5rem;
     }
   }
 
-  .link {
-    font-size: 1.25rem;
-    text-decoration: underline;
+  .logOutBtn {
+    margin-top: 100px;
   }
 }

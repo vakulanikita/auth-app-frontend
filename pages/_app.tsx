@@ -3,9 +3,23 @@ import type { AppProps } from "next/app";
 import "../styles/normalize.scss";
 import "../styles/globals.scss";
 import { Provider } from "react-redux";
-import { setupStore } from '../redux/store/store'
+import { setupStore } from "../redux/store/store";
+import { CookiesProvider } from "react-cookie";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const store = setupStore()
+const store = setupStore();
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      "Spectral",
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+    ].join(","),
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,7 +33,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Provider store={store}>
-        <Component {...pageProps} />
+        <CookiesProvider>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </CookiesProvider>
       </Provider>
     </>
   );
