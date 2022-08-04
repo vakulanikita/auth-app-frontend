@@ -22,10 +22,11 @@
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
+    line-height: var(--xl_2);
 
     .title {
       position: relative;
-      top: 1px;
+      // top: 1px;
       font-weight: var(--bold);
     }
 
