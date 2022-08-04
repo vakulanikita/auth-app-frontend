@@ -59,7 +59,7 @@ const LoginPage: NextPage = () => {
                   .then((result) => {
                     console.log(result);
                     if (result.data.status === "notActive") {
-                      router.replace(`/security?email=${values.email}`);
+                      router.push(`/security?email=${values.email}`);
                       return;
                     }
 

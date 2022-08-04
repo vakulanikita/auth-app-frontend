@@ -73,7 +73,7 @@ const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
                       setError("An account with this email already exists");
                     }
                     if (result.data.status === "success") {
-                      router.replace(`/security?email=${values.email}`);
+                      router.push(`/security?email=${values.email}`);
                     }
                   })
                   .catch((err) => {
