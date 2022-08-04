@@ -77,10 +77,9 @@ const SecurityPage: NextPage<SecurityPageProps> = ({ email }) => {
           <div className={s.wrapper}>
             <h1 className={s.title}>Verify Your Identity</h1>
             <div className={s.subtitle}>
-              A verification code has been sent to <span>{email}</span>. Enter
+              A verification code has been sent to <span>{email}</span> (check your spam folder). Enter
               the code to continue and be redirected.
             </div>
-            <div className={s.subtitle}>Check your spam folder</div>
 
             {error && (
               <Alert severity="error" className={s.errorAlert}>

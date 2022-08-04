@@ -21,6 +21,15 @@
     border: 1px solid var(--lightgray);
   }
 
+  .labelRow {
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      opacity: .9;
+    }
+  }
+
   label {
     display: block;
     background-color: #fff;

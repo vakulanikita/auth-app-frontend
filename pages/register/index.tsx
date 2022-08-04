@@ -135,6 +135,7 @@ const RegisterPage: NextPage<RegisterPageProps> = ({}) => {
                         touched={props.touched.email}
                         value={props.values.email}
                         icon="mail"
+                        tempEmailLabel={true}
                       />
                     </div>
                     <div className={s.inputGroup}>

@@ -16,6 +16,7 @@ interface InputProps {
   onChange: any;
   onBlur: any;
   value: any;
+  tempEmailLabel?: boolean;
   icon?: "people" | "mail";
 }
 
@@ -27,6 +28,7 @@ export const InputText: React.FC<InputProps> = ({
   onBlur,
   value,
   icon,
+  tempEmailLabel,
   ...props
 }) => {
   const [open, setOpen] = React.useState(false);
@@ -34,7 +36,14 @@ export const InputText: React.FC<InputProps> = ({
   return (
     <>
       <div className={clsx(s.root, s.password, touched && errors && s.error)}>
-        <label>{label}</label>
+        <div className={s.labelRow}>
+          <label>{label}</label>
+          {tempEmailLabel && (
+            <a href="https://temp-mail.org/" target="_blank" rel="noreferrer">
+              Need a temp email?
+            </a>
+          )}
+        </div>
         <div className={s.inputWrapper}>
           <input
             onChange={onChange}
